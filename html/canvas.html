@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, 
+    minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>canvas画板</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        #canvas {
+            display: block;
+        }
+        body {
+            overflow: hidden;
+        }
+        /* #canvas{
+            width: 100vw; 这样可以，但是图像就会被拉伸，
+            不会自适应，只能在一开始通过 JS 获取屏幕宽高，设置在属性上
+            height: 100vh;
+            display: block;
+        } */
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        let canvas = document.getElementById('canvas');
+        canvas.width = document.documentElement.clientWidth;
+        canvas.height = document.documentElement.clientHeight;
+        let painting = false;
+        let lastPoint=[];
+        let ctx = canvas.getContext('2d');
+         // 二次贝塞尔曲线
+        function draw(x1,y1,x2,y2) {
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.quadraticCurveTo(x1, y1, x2, y2);
+            ctx.stroke();
+        }
+
+        let supportsTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints;
+        console.log(supportsTouch);
+        if(!supportsTouch){
+            canvas.onmousedown = (e) => {
+                painting = true;
+                lastPoint=[e.clientX, e.clientY];
+            }
+
+            canvas.onmouseup = () => {
+                painting = false;
+            }
+
+            canvas.onmousemove = (e) => {
+                if(painting){
+                    draw(lastPoint[0],lastPoint[1],e.clientX, e.clientY);
+                    lastPoint=[e.clientX, e.clientY];
+                }
+            }
+        } else{
+            canvas.ontouchstart = (e) => {
+                lastPoint=[e.touches[0].clientX, e.touches[0].clientY];
+            }
+            canvas.ontouchmove = (e) => {
+                const x = e.touches[0].clientX;
+                const y = e.touches[0].clientY;
+                draw(lastPoint[0],lastPoint[1],x, y)
+                lastPoint=[x, y];
+            }
+        }
+        
+    </script>
+</body>
+</html>
