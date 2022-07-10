@@ -43,8 +43,21 @@ var server = http.createServer(function(request, response){
   } else if(path === '/5.json'){
     response.statusCode = 200
     response.setHeader('Content-Type', 'application/json;charset=utf-8')
+    console.log(request.headers['referer']); 
+    /* CORS */
+    response.setHeader('Access-Control-Allow-Origin', 'http://localhost:9999')
     const string = fs.readFileSync('5.json');
     response.write(string)
+    response.end()
+  } else if(path === '/5.js'){
+    response.statusCode = 200
+    response.setHeader('Content-Type', 'text/javascript;charset=utf-8')
+    console.log(request.headers['referer']); 
+    /* JSONP */
+    let string = fs.readFileSync('5.js').toString();
+    const string2 = fs.readFileSync('5.json').toString();
+    str = string.replace(/{data}/g,string2);
+    response.write(str);
     response.end()
   } else {
     response.statusCode = 404

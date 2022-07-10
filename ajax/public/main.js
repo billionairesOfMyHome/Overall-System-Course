@@ -1,3 +1,29 @@
+/* 跨域 CORS */
+const request = new XMLHttpRequest();
+request.open('GET','http://localhost:8888/5.json');
+request.onreadystatechange = () => {
+  if (request.readyState === 4) {
+    if (request.status >= 200 && request.status < 300) {
+      const response = request.response;
+      // console.log(response);
+    } else {
+      console.error('something wrong');
+    }
+  }
+}
+request.send();
+
+/* 跨域 JSONP */
+/* window.xxx 是数据
+window.onload = () =>{
+  console.log(window.xxx);
+} */
+// window.xxx 是函数
+// const random = Math.random();
+window.xxx = (data)=>{
+  console.log('来着9999的函数', data);
+}
+
 getCSS .onclick = () => {
   const request = new XMLHttpRequest();
   request.open('GET','/style.css');
