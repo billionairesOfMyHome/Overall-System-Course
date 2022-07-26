@@ -11312,15 +11312,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var $tabBar = (0, _jquery2.default)('#app2 .tab-bar');
 var $tabContent = (0, _jquery2.default)('#app2 .tab-content');
+var localKey = 'app2-ind';
+var ind = localStorage.getItem(localKey) || 0;
 
 $tabBar.on('click', 'li', function (e) {
   var $li = (0, _jquery2.default)(e.currentTarget);
   $li.addClass('selected').siblings().removeClass('selected');
   var ind = $li.index();
+  localStorage.setItem(localKey, ind);
   $tabContent.children().eq(ind).addClass('active').siblings().removeClass('active');
 });
 
-$tabBar.children().eq(0).trigger('click');
+$tabBar.children().eq(ind).trigger('click');
 },{"jquery":"..\\node_modules\\jquery\\dist\\jquery.js","./app2.css":"app2.css"}],"app3.css":[function(require,module,exports) {
 
 var reloadCSS = require('_css_loader');
@@ -11338,8 +11341,22 @@ require('./app3.css');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var $square = (0, _jquery2.default)('#app3 .square');
+var localKey = 'app3-active';
+
+/* if (localStorage.getItem(localKey) === 'yes') {
+  $square.addClass('active');
+} */
+var active = localStorage.getItem(localKey) === 'yes';
+$square.toggleClass('active', active);
+
 $square.on('click', function () {
-  $square.toggleClass('active');
+  if ($square.hasClass('active')) {
+    localStorage.setItem(localKey, 'no');
+    $square.removeClass('active');
+  } else {
+    localStorage.setItem(localKey, 'yes');
+    $square.addClass('active');
+  }
 });
 },{"jquery":"..\\node_modules\\jquery\\dist\\jquery.js","./app3.css":"app3.css"}],"app4.css":[function(require,module,exports) {
 
