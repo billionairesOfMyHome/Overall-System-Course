@@ -11263,6 +11263,10 @@ require('./app1.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var html = '<section id="app1">\n<div class="output">\n  <span id="num">100</span>\n</div>\n<div class="actions">\n  <button id="add1">+1</button>\n  <button id="minus1">-1</button>\n  <button id="mul2">x2</button>\n  <button id="divide2">\xF72</button>\n</div>\n</section>';
+
+var $element = (0, _jquery2.default)(html).prependTo('body>.page');
+
 var $btn1 = (0, _jquery2.default)('#add1');
 var $btn2 = (0, _jquery2.default)('#minus1');
 var $btn3 = (0, _jquery2.default)('#mul2');
@@ -11310,6 +11314,10 @@ require('./app2.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var html = '<section id="app2">\n<ul class="tab-bar">\n  <li><span>1111</span></li>\n  <li><span>222</span></li>\n</ul>\n<ol class="tab-content">\n  <li>\u5185\u5BB91</li>\n  <li>\u5185\u5BB92</li>\n</ol>\n</section>';
+
+var $element = (0, _jquery2.default)(html).appendTo('body>.page');
+
 var $tabBar = (0, _jquery2.default)('#app2 .tab-bar');
 var $tabContent = (0, _jquery2.default)('#app2 .tab-content');
 var localKey = 'app2-ind';
@@ -11339,6 +11347,10 @@ var _jquery2 = _interopRequireDefault(_jquery);
 require('./app3.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var html = '<section id="app3">\n<div class="square">\n</div>\n</section>';
+
+var $element = (0, _jquery2.default)(html).appendTo('body>.page');
 
 var $square = (0, _jquery2.default)('#app3 .square');
 var localKey = 'app3-active';
@@ -11373,6 +11385,10 @@ var _jquery2 = _interopRequireDefault(_jquery);
 require('./app4.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var html = '<section id="app4">\n<div class="circle">\n</div>\n</section>';
+
+var $element = (0, _jquery2.default)(html).appendTo('body>.page');
 
 var $circle = (0, _jquery2.default)('#app4 .circle');
 $circle.on('mouseenter', function () {
