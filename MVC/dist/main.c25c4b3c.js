@@ -11263,41 +11263,128 @@ require('./app1.css');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var html = '<section id="app1">\n<div class="output">\n  <span id="num">100</span>\n</div>\n<div class="actions">\n  <button id="add1">+1</button>\n  <button id="minus1">-1</button>\n  <button id="mul2">x2</button>\n  <button id="divide2">\xF72</button>\n</div>\n</section>';
+// 初始化 HTML
+// 视图都放到 v
+var v = {
+  el: null,
+  html: '<section id="app1">\n  <div class="output">\n    <span id="num">{{n}}</span>\n  </div>\n  <div class="actions">\n    <button id="add1">+1</button>\n    <button id="minus1">-1</button>\n    <button id="mul2">x2</button>\n    <button id="divide2">\xF72</button>\n  </div>\n  </section>',
+  render: function render(container) {
+    if (!v.el) {
+      (0, _jquery2.default)(v.html.replace('{{n}}', m.data.n)).prependTo((0, _jquery2.default)(container));
+    } else {
+      var newElement = (0, _jquery2.default)(v.html.replace('{{n}}', m.data.n));
+      v.el.replaceAll(newElement);
+      v.el = newElement;
+    }
+  }
+  /* update: () => {
+    c.ui.num.text(m.data.n || 100)
+  } */
 
-var $element = (0, _jquery2.default)(html).prependTo('body>.page');
+  /* const html = `<section id="app1">
+  <div class="output">
+    <span id="num">100</span>
+  </div>
+  <div class="actions">
+    <button id="add1">+1</button>
+    <button id="minus1">-1</button>
+    <button id="mul2">x2</button>
+    <button id="divide2">÷2</button>
+  </div>
+  </section>`; */
 
-var $btn1 = (0, _jquery2.default)('#add1');
-var $btn2 = (0, _jquery2.default)('#minus1');
-var $btn3 = (0, _jquery2.default)('#mul2');
-var $btn4 = (0, _jquery2.default)('#divide2');
-var $num = (0, _jquery2.default)('#num');
-var n = localStorage.getItem('n');
-$num.text(n ? n : 100);
-$btn1.on('click', function () {
-  var n = Number($num.text());
-  n++;
-  $num.text(n);
+  // const $element = $(html).prependTo('body>.page');
+
+  // 第一次渲染 html
+
+
+  // 初始化数据
+  // const n = localStorage.getItem('n');
+
+  // 数据相关都放到 m
+};var m = {
+  data: {
+    n: Number(localStorage.getItem('n'))
+  }
+
+  // 将数据渲染到页面
+  // $num.text(n ? n : 100)
+
+  // 需要的重要元素
+  /* const $btn1 = $('#add1');
+  const $btn2 = $('#minus1');
+  const $btn3 = $('#mul2');
+  const $btn4 = $('#divide2');
+  const $num = $('#num'); */
+
+  // console.log($('#add1'));
+
+  // 其他放到 c
+};var c = {
+  init: function init(container) {
+    v.render(container);
+    c.ui = {
+      btn1: (0, _jquery2.default)('#add1'),
+      btn2: (0, _jquery2.default)('#minus1'),
+      btn3: (0, _jquery2.default)('#mul2'),
+      btn4: (0, _jquery2.default)('#divide2'),
+      num: (0, _jquery2.default)('#num')
+    };
+    c.bindEvents();
+  },
+  bindEvents: function bindEvents() {
+    /* console.log(111);
+    console.log(c.ui.btn1); */
+    c.ui.btn1.on('click', function () {
+      m.data.n += 1;
+      v.render();
+      localStorage.setItem('n', m.data.n);
+    });
+    c.ui.btn2.on('click', function () {
+      m.data.n -= 1;
+      v.render();
+      localStorage.setItem('n', m.data.n);
+    });
+    c.ui.btn3.on('click', function () {
+      m.data.n *= 2;
+      v.render();
+      localStorage.setItem('n', m.data.n);
+    });
+    c.ui.btn4.on('click', function () {
+      m.data.n /= 2;
+      v.render();
+      localStorage.setItem('n', m.data.n);
+    });
+  }
+};
+// c.bindEvents();
+c.init('body>.page');
+
+// 绑定鼠标事件
+/* $btn1.on('click', () => {
+  let n = Number($num.text())
+  n++
+  $num.text(n)
   localStorage.setItem('n', n);
-});
-$btn2.on('click', function () {
-  var n = Number($num.text());
-  n--;
-  $num.text(n);
+})
+$btn2.on('click', () => {
+  let n = Number($num.text())
+  n--
+  $num.text(n)
   localStorage.setItem('n', n);
-});
-$btn3.on('click', function () {
-  var n = Number($num.text());
-  n *= 2;
-  $num.text(n);
+})
+$btn3.on('click', () => {
+  let n = Number($num.text())
+  n *= 2
+  $num.text(n)
   localStorage.setItem('n', n);
-});
-$btn4.on('click', function () {
-  var n = Number($num.text());
-  n /= 2;
-  $num.text(n);
+})
+$btn4.on('click', () => {
+  let n = Number($num.text())
+  n /= 2
+  $num.text(n)
   localStorage.setItem('n', n);
-});
+}) */
 },{"jquery":"..\\node_modules\\jquery\\dist\\jquery.js","./app1.css":"app1.css"}],"app2.css":[function(require,module,exports) {
 
 var reloadCSS = require('_css_loader');
