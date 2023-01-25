@@ -1,0 +1,12 @@
+@import url(c1.css);
+@media (max-width: 500px) {
+  div {
+    overflow: visible;
+  }
+}
+@media (min-width: 501px) {
+  div {
+    height: 100px;
+    overflow: scroll;
+  }
+}
